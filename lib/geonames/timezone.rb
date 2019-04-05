@@ -1,12 +1,13 @@
 #=============================================================================
 #
-# Copyright 2007 Adam Wisniewski <adamw@tbcn.ca> 
+# Copyright 2007 Adam Wisniewski <adamw@tbcn.ca>
+# Contributions by Chris Griego
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
-# the License at 
+# the License at
 #
-#  http://www.apache.org/licenses/LICENSE-2.0 
+#  http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
@@ -17,17 +18,11 @@
 #=============================================================================
 
 module Geonames
-    class Timezone
-        attr :timezone_id
-        attr :gmt_offset
-        attr :dst_offset
-        
-        attr_writer :timezone_id, :gmt_offset, :dst_offset
+  class Timezone
+    attr_accessor :timezone_id, :gmt_offset, :dst_offset, :raw_offset
 
-        def tzinfo
-          TZInfo::Timezone.get(timezone_id)
-        end
+    def tzinfo
+      TZInfo::Timezone.get(timezone_id)
+    end
   end
 end
-
-

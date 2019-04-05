@@ -1,6 +1,7 @@
 #=============================================================================
 #
 # Copyright 2007 Adam Wisniewski <adamw@tbcn.ca>
+# Contributions by Chris Griego
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
@@ -18,25 +19,9 @@
 
 module Geonames
   class WikipediaArticle
-
-    attr :language
-    attr :title
-    attr :summary
-    attr :wikipedia_url
-    attr :feature
-    attr :population
-    attr :elevation
-    attr :latitude
-    attr :longitude
-    attr :thumbnail_img
-    attr :distance
-
-    attr_writer :language, :title, :summary
-    attr_writer :wikipedia_url, :feature, :population
-    attr_writer :elevation, :latitude, :longitude
-    attr_writer :thumbnail_img, :distance
-
+    attr_accessor :language, :title, :summary,
+                  :wikipedia_url, :feature, :population,
+                  :elevation, :latitude, :longitude,
+                  :thumbnail_img, :distance
   end
 end
-
-

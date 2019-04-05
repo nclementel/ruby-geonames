@@ -1,12 +1,13 @@
 #=============================================================================
 #
-# Copyright 2010 Jan Schwenzien <jan@schwenzien.info> 
+# Copyright 2010 Jan Schwenzien <jan@schwenzien.info>
+# Contributions by Chris Griego
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
-# the License at 
+# the License at
 #
-#  http://www.apache.org/licenses/LICENSE-2.0 
+#  http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
@@ -18,49 +19,27 @@
 
 module Geonames
   class Config
+    @@default_base_url = "http://api.geonames.org"
+    @@default_lang     = "en"
+    @@default_username = nil
+    @@default_token    = nil
 
-    attr_reader :password
-
-    @@default_username  = nil
-    @@default_base_url  = "http://ws.geonames.org"
-    @@default_lang      = "en"
-    @@default_radius    = 0.5
-
-    def radius
-      @radius || @@default_radius
-    end
-
-    def radius=(radius)
-      @radius = radius
-    end
-
-    def username
-      @username || @@default_username
-    end
-
-    def username=(username)
-      @username = username
-    end
-
-    def password=(password)
-      @password = password
-    end
+    attr_writer :base_url, :lang, :username, :token
 
     def base_url
       @base_url || @@default_base_url
-    end
-
-    def base_url=(base_url)
-      @base_url = base_url
     end
 
     def lang
       @lang || @@default_lang
     end
 
-    def lang=(lang)
-      @lang = lang
+    def username
+      @username || @@default_username
     end
 
+    def token
+      @token || @@default_token
+    end
   end
 end

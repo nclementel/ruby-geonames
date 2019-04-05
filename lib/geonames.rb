@@ -1,12 +1,13 @@
 #=============================================================================
 #
-# Copyright 2007 Adam Wisniewski <adamw@tbcn.ca> 
+# Copyright 2007 Adam Wisniewski <adamw@tbcn.ca>
+# Contributions by Chris Griego
 #
 # Licensed under the Apache License, Version 2.0 (the "License"); you may not
 # use this file except in compliance with the License. You may obtain a copy of
-# the License at 
+# the License at
 #
-#  http://www.apache.org/licenses/LICENSE-2.0 
+#  http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
@@ -15,35 +16,32 @@
 # the License.
 #
 #=============================================================================
-
-require 'cgi'
-require 'net/http'
-require 'rexml/document'
-
-require_relative 'web_service'
-require_relative 'toponym'
-require_relative 'toponym_search_result'
-require_relative 'toponym_search_criteria'
-require_relative 'postal_code'
-require_relative 'postal_code_search_criteria'
-require_relative 'timezone'
-require_relative 'country_subdivision'
-require_relative 'wikipedia_article'
-require_relative 'intersection'
+require 'geonames/version'
 
 module Geonames
-  autoload :Config,  'geonames/config'
+  autoload :BoundingBox,              'geonames/bounding_box'
+  autoload :Config,                   'geonames/config'
+  autoload :CountryInfo,              'geonames/country_info'
+  autoload :CountrySubdivision,       'geonames/country_subdivision'
+  autoload :Intersection,             'geonames/intersection'
+  autoload :PostalCode,               'geonames/postal_code'
+  autoload :PostalCodeSearchCriteria, 'geonames/postal_code_search_criteria'
+  autoload :Timezone,                 'geonames/timezone'
+  autoload :Toponym,                  'geonames/toponym'
+  autoload :ToponymSearchCriteria,    'geonames/toponym_search_criteria'
+  autoload :ToponymSearchResult,      'geonames/toponym_search_result'
+  autoload :WebService,               'geonames/web_service'
+  autoload :WikipediaArticle,         'geonames/wikipedia_article'
 
-  GEONAMES_SERVER = "http://ws.geonames.org"
-  USER_AGENT = "geonames ruby webservice client 0.1"
+  GEONAMES_SERVER = "http://ws.geonames.net"
+  USER_AGENT      = "geonames ruby webservice client #{VERSION}"
 
   class << self
-
     def config
-        $config ||= Geonames::Config.new
+      Thread.current[:geonames_config] ||= Geonames::Config.new
     end
 
-    %w(lang username base_url password radius).each do |method|
+    %w(base_url lang username token).each do |method|
       module_eval <<-DELEGATORS, __FILE__, __LINE__ + 1
         def #{method}
           config.#{method}
@@ -54,8 +52,5 @@ module Geonames
         end
       DELEGATORS
     end
-
   end
-
 end
-
