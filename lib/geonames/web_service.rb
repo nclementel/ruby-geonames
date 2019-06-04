@@ -112,7 +112,6 @@ module Geonames
       intersection.street_1     = get_element_child_text(element,  'street1')
       intersection.street_2     = get_element_child_text(element,  'street2')
       intersection.admin_code_1 = get_element_child_text(element,  'adminCode1')
-      intersection.admin_code_1 = get_element_child_text(element,  'adminCode1')
       intersection.admin_code_2 = get_element_child_text(element,  'adminCode2')
       intersection.admin_name_1 = get_element_child_text(element,  'adminName1')
       intersection.admin_name_2 = get_element_child_text(element,  'adminName2')
@@ -370,6 +369,7 @@ module Geonames
       url << "&lng="     + long.to_s
       url << "&maxRows=" + maxRows.to_s
       url << "&radius="  + radius.to_s
+      url << "&level=2"
 
       res = make_request(url, args)
 
@@ -386,6 +386,8 @@ module Geonames
           country_subdivision.country_name = get_element_child_text(element, 'countryName')
           country_subdivision.admin_code_1 = get_element_child_text(element, 'adminCode1')
           country_subdivision.admin_name_1 = get_element_child_text(element, 'adminName1')
+          country_subdivision.admin_code_2 = get_element_child_text(element, 'adminCode2')
+          country_subdivision.admin_name_2 = get_element_child_text(element, 'adminName2')
           country_subdivision.code_fips    = get_element_child_text(element, 'code[@type="FIPS10-4"]')
           country_subdivision.code_iso     = get_element_child_text(element, 'code[@type="ISO3166-2"]')
 

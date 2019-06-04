@@ -21,6 +21,7 @@ module Geonames
   class CountrySubdivision
     attr_accessor :country_code, :country_name,
                   :admin_name_1, :admin_code_1,
+                  :admin_name_2, :admin_code_2,
                   :code_fips, :code_iso
   end
 end
